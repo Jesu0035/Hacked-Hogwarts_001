@@ -3,5 +3,74 @@
 }
 
 body {
-  background-color: rgb(223, 118, 118);
+  background-color: rgb(211, 193, 193);
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+}
+
+#students {
+  margin: auto;
+  width: 100%;
+  max-width: 1300px;
+  height: 200px;
+  padding: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+  display: grid;
+  grid: gap 20px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  border: 1px black;
+  margin: 10em;
+  padding: 10em;
+}
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#myBtn {
+  background-color: rgb(19, 20, 19);
+  color: whitesmoke;
+  border: 0;
+  padding: 2px;
+  font-size: 10px;
+  cursor: pointer;
+  position: relative;
+  margin-top: 1px;
+}
+
+.student {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 10px 10px 78px -1px rgba(0, 0, 0, 0.25);
+  position: relative;
+  padding: 15px;
+  flex-direction: column;
 }
