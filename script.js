@@ -1,84 +1,146 @@
 'use strict';
-window.addEventListener('DomContentLoaded', start);
+
+window.addEventListener('DOMContentLoaded', start);
 
 
+
+const allStudents = [];
+const settings = {
+  filterBy: "all",
+  sortBy: "firstname",
+  sortDir: "asc",
+};
+const Student = {
+  firstName:'',
+  middleName:'',
+  lastName: '',
+  gender:'',
+  house: ''
+};
 function start(){
-  
+ loadJSON() 
+
 }
 
-fetch('https://petlatkea.dk/2021/hogwarts/students.json')
-.then(function(response){
-    console.log(response)
-    return response.json(); 
-})
-.then(function(data){
-console.log(data);
-    dataReceived(data);
-})
-function dataReceived(students){
- students.forEach(student => {
-   console.log(student);
-   showList(student);
+function loadJSON() {
+  fetch("https://petlatkea.dk/2021/hogwarts/students.json")
+    .then((response) => response.json())
+    .then((jsonData) => {
+      prepareObjects(jsonData);
+    });
+}
+
+function prepareObjects(jsonData) {
+ 
+jsonData.forEach((jsonObject) => {
+/* console.log (jsonObject); */
+const student = Object.create(Student);
+
+
+const fullNameTrim = jsonObject.fullname.trim();
+const firstSpace = fullNameTrim.indexOf(" ");
+const lastSpace = fullNameTrim.lastIndexOf(" ");
+
+const firstName = fullNameTrim.substring(0, firstSpace);
+const firstNameTrim = firstName.trim();
+const firstNameFinal = firstNameTrim.charAt(0).toUpperCase() + firstNameTrim.substring(1).toLowerCase();
+
+const middleName = fullNameTrim.substring(firstSpace + 1, lastSpace);
+const middleNameTrim = middleName.trim();
+const middleNameFinal = middleNameTrim.charAt(0).toUpperCase() + middleNameTrim.substring(1).toLowerCase();
+
+const lastName = fullNameTrim.substring(lastSpace);
+const lastNameTrim = lastName.trim();
+const lastNameFinal = lastNameTrim.charAt(0).toUpperCase() + lastNameTrim.substring(1).toLowerCase();
+
+const house = jsonObject.house.trim();
+const houseFinal = house[0].toUpperCase() + house.substring(1).toLowerCase();
+
+student.firstName = firstNameFinal;
+student.middleName = middleNameFinal;
+student.lastName = lastNameFinal;
+
+student.house = houseFinal;
+allStudents.push(student); 
+
+const texts = jsonObject.fullname.trim().split(' '); 
+
+  if(texts.lengt == 1){
+
+    student.firstName = capitalizeString(texts[0]);
+  }
+  
+  if (texts.lengt == 1){
+    student.middleName = capitalizeString(texts[1]);
+  }
+  
+if ( texts.leght == 2){
+  student.lastName= capitalizeString(texts[2]);
+}
+  student.gender = capitalizeString(jsonObject.gender);
+  student.house = capitalizeString(jsonObject.house); 
+ 
+});
+function capitalizeString(string){
+return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase(); 
+} 
+console.log(allStudents);
+
+ displayList(allStudents);
+ builtList()
+} 
+//----------------filtering
+function selectFilter(event) {
+  const filter = event.target.dataset.filter;
+  // console.log(`User selected ${filter}`);
+  setFilter(filter);
+}
+
+function setFilter(filter) {
+  settings.filterBy = filter;
+  builtList()
+} 
+function builtList(allStudents){
+  const currentList =  allStudents; 
+  // TODO: Add filter and sort on this list, before displaying
+    displayList( currentList );
+}
+
+function displayList(Students){
+ 
+  // clear the list
+  /*  document.querySelector("#list tbody").innerHTML = ""; */
+
+  // build a new list
+    Students.forEach( displayStudent ); 
    
- });
-       
-}      
-function showList(student){
-    console.log(student);
-const template = document.querySelector('#myTemplate').content;
-const copy = template.cloneNode(true);
-copy.querySelector('.name').textContent = student.fullname;
-copy.querySelector('.gender').textContent = student.gender;
-copy.querySelector('.house').textContent = student.house;
+}
+function displayStudent( student) {
+  // create clone
+   const copy = document.querySelector("template#myTemplate").content.cloneNode(true);
+
+  // set clone data
+  
+  copy.querySelector('.fullname').textContent = student.fullName;
+  /* copy.querySelector('.midlename').textContent = student.middleName; */
+
+  copy.querySelector('.gender').textContent = student.gender;
+  copy.querySelector('.house').textContent = student.house;
 
 const parentElement = document.querySelector('section#students');
 
 document.querySelector('main').appendChild(copy);
+  // TODO: Display winner
 
-modal(student);
+  // TODO: Display star
+
+ /*  clone.querySelector("[data-field=name]").textContent = animal.name;
+  clone.querySelector("[data-field=desc]").textContent = animal.desc;
+  clone.querySelector("[data-field=type]").textContent = animal.type;
+  clone.querySelector("[data-field=age]").textContent = animal.age; '*/
+
+  // TODO: Add event listeners for star and winner
+
+  // append clone to list
+  /* document.querySelector("#list tbody").appendChild( clone ); */
 };
-
-function modal(student){
-
-const modal = document.getElementById("myModal");
-const btn = document.getElementById("myBtn");
-const span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-span.onclick = function() {
-  modal.style.display = "none";
-}
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-}  
-};
-
-
-
-
-/*   // Get the modal
-  const modal = document.getElementById("myModal");
-  // Get the button that opens the modal
-  const btn = document.getElementById("myBtn");
-  // Get the <span> element that closes the modal
-  const span = document.getElementsByClassName("close")[0];
-  // When the user clicks the button, open the modal 
-  btn.onclick = function() {
-    modal.style.display = "block";
-  }
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }  
-  }; */

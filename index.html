@@ -9,12 +9,23 @@
 </head>
 <body>
      <h1>The Magic is coming soon....</h1>
-     
+     <p><!-- TO DO -this is for the filters buttons -->
+      Filter:
+      <button class="filter" data-action="filter" data-filter="house">house</button>
+      <button class="filter" data-action="filter" data-filter="gender">Gender</button>
+      <button class="filter" data-action="filter" data-filter="*">all</button>
+    </p>
+
+    <hr /> 
 <main>
-    <template id="myTemplate">
+  
+<template id="myTemplate">
     <section id="students">
       <div class="student">
-      <div class="name"> Name</div>
+      <div class="fullname"> Name</div>
+      <div class="lastname">lastname </div>
+      <div class="middlename">middlename </div>
+      <div class="image"> </div>
       <div class='gender'>gender</div>
      <div class="house">house</div>
       <div>
@@ -22,14 +33,8 @@
        </div>
     </section>
 </section>
-
- </template>
+  </template> 
 </main> 
- <!-- <section class="modal">
-  <p class="modal-name"></p>
-  <p class="modal-gender"></p>
-  <p class="modal-house"></p>
-</section>  -->
 
   <!-- Modal content -->
  <div id="myModal" class="modal">
