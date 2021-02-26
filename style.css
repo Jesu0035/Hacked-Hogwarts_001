@@ -53,11 +53,11 @@ body {
 }
 
 #myBtn {
-  background-color: rgb(19, 20, 19);
+  background-color: rgb(60, 133, 60);
   color: whitesmoke;
   border: 0;
   padding: 2px;
-  font-size: 10px;
+  font-size: 15px;
   cursor: pointer;
   position: relative;
   margin-top: 1px;
