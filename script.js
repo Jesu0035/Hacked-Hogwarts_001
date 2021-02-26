@@ -100,7 +100,7 @@ function setFilter(filter) {
   settings.filterBy = filter;
   builtList()
 } 
-function builtList(allStudents){
+function builtList(){
   const currentList =  allStudents; 
   // TODO: Add filter and sort on this list, before displaying
     displayList( currentList );
@@ -109,7 +109,6 @@ function builtList(allStudents){
 function displayList(Students){
  
   // clear the list
-  /*  document.querySelector("#list tbody").innerHTML = ""; */
 
   // build a new list
     Students.forEach( displayStudent ); 
@@ -121,7 +120,9 @@ function displayStudent( student) {
 
   // set clone data
   
-  copy.querySelector('.fullname').textContent = student.fullName;
+  copy.querySelector('.firstname').textContent = student.firstName;
+  copy.querySelector('.middlename').textContent = student.middleName;
+  copy.querySelector('.lastname').textContent = student.lastName;
   /* copy.querySelector('.midlename').textContent = student.middleName; */
 
   copy.querySelector('.gender').textContent = student.gender;
