@@ -110,6 +110,7 @@ function displayList(Students){
  
   // clear the list
 
+
   // build a new list
     Students.forEach( displayStudent ); 
    
@@ -134,14 +135,4 @@ document.querySelector('main').appendChild(copy);
   // TODO: Display winner
 
   // TODO: Display star
-
- /*  clone.querySelector("[data-field=name]").textContent = animal.name;
-  clone.querySelector("[data-field=desc]").textContent = animal.desc;
-  clone.querySelector("[data-field=type]").textContent = animal.type;
-  clone.querySelector("[data-field=age]").textContent = animal.age; '*/
-
-  // TODO: Add event listeners for star and winner
-
-  // append clone to list
-  /* document.querySelector("#list tbody").appendChild( clone ); */
 };
